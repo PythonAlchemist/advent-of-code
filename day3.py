@@ -1,24 +1,9 @@
 def contains_common(a, b, c):
-    d1 = dict()
-    d2 = dict()
-    d3 = dict()
-    for i in a:
-        if i in d1:
-            d1[i] += 1
-        else:
-            d1[i] = 1
-    for i in b:
-        if i in d2:
-            d2[i] += 1
-        else:
-            d2[i] = 1
-    for i in c:
-        if i in d3:
-            d3[i] += 1
-        else:
-            d3[i] = 1
+    d1 = set(a)
+    d2 = set(b)
+    d3 = set(c)
 
-    return list(set(d1.keys()) & set(d2.keys()) & set(d3.keys()))[0]
+    return list(d1 & d2 & d3)[0]
 
 
 ct = 0
