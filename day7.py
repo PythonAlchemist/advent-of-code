@@ -17,22 +17,27 @@ def changeUp(currDir):
 data = open("./inputs/day7.txt", "r").read().splitlines()
 data = [line for line in data]
 
-# transform data into a list of lists
+# transform data into a list of lists each element contains contents of directory (for ls)
 # 0th element is the command prompt
 packets = list()
 pack = list()
 for line in data:
+    # on new command prompt, append previous packet to packets and reset pack
     if line[0] == "$" and len(pack) > 0:
         packets.append(pack)
         pack = list()
         pack.append(line)
     else:
         pack.append(line)
+
+# append last packet which is not appended in the loop
 packets.append(pack)
 
+# initialize CWD
 currDir = "/"
 dirs = dict()
 
+# skip first packet since it is always cd into home directory
 for pack in packets[1:]:
 
     # command prompt
@@ -50,30 +55,31 @@ for pack in packets[1:]:
         dirs[currDir] = 0
 
     if command[1] == "ls":
+        # payload is the output of ls
         for payload in pack:
             payload = payload.split()
+
+            # directory listing
             if payload[0] == "dir":
                 tempDir = changeDown(currDir, payload[1])
                 if tempDir not in dirs:
                     dirs[tempDir] = 0
+
+            # file listing
             elif payload[0].isnumeric():
                 dirs[currDir] += int(payload[0])
 
 
-# sort keys by name
+# sort keys by length of path and then by path_name length, deepest first
 dirs = dict(
     sorted(dirs.items(), key=lambda k: (len(k[0].split("/")), len(k[0])), reverse=True)
 )
 
-# roll up the tree
+# roll up the tree deepest to shallowest
 for k, v in dirs.items():
     if k != "/":
-        parent = k[: k.rfind("/")]
-        if parent == "":
-            parent = "/"
-
+        parent = changeUp(k)
         dirs[parent] += v
-
 
 # part 1 - sum directories with less than 100,000 bytes
 ct = 0
