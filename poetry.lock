@@ -1,4 +1,12 @@
 [[package]]
+name = "numpy"
+version = "1.23.5"
+description = "NumPy is the fundamental package for array computing with Python."
+category = "main"
+optional = false
+python-versions = ">=3.8"
+
+[[package]]
 name = "urllib3"
 version = "1.26.13"
 description = "HTTP library with thread-safe connection pooling, file post, and more."
@@ -14,7 +22,8 @@ socks = ["PySocks (>=1.5.6,!=1.5.7,<2.0)"]
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.10"
-content-hash = "4854a38dba2880015a1ad30057a5a1db77adf9becc499cb67b320563b6a6f179"
+content-hash = "40dfbe489d7e7f67649fb765d70018d1529492212e90ea2246dcd8b663fab37a"
 
 [metadata.files]
+numpy = []
 urllib3 = []
