@@ -1,4 +1,4 @@
-def tailMech(head, tail) -> tuple:
+def tailMech(head, tail) -> list:
 
     row_lead = head[0] - tail[0]
     col_lead = head[1] - tail[1]
@@ -19,6 +19,7 @@ def tailMech(head, tail) -> tuple:
         return [tail[0], tail[1] - 1]
 
     # handle diagonal movement
+    # both equal to 1 or -1 will be handled by the first if case
     elif row_lead >= 1 and col_lead >= 1:
         return [tail[0] + 1, tail[1] + 1]
     elif row_lead >= 1 and col_lead <= -1:
