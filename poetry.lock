@@ -27,3 +27,6 @@ content-hash = "40dfbe489d7e7f67649fb765d70018d1529492212e90ea2246dcd8b663fab37a
 [metadata.files]
 numpy = []
 urllib3 = []
+
+[flake8]
+ignore = E501
